@@ -12,7 +12,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
         classpath 'com.matthewprenger:CurseGradle:1.0-SNAPSHOT'
     }
 }
@@ -32,9 +32,9 @@ repositories {
     }
 }
 
-dependencies {
-    deobfCompile name: 'bspkrsCore', version: project.bscore_version, ext: 'jar'
-}
+//dependencies {
+//    deobfCompile name: 'bspkrsCore', version: project.bscore_version, ext: 'jar'
+//}
 
 group = project.group_name
 version = project.mod_version
