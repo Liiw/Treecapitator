@@ -295,8 +295,10 @@ public class Treecapitator
         {
             currentAxeDamage = Math.round(currentAxeDamage);
 
-            for (int i = 0; i < MathHelper.floor_double(currentAxeDamage); i++)
+            for (int i = 0; i < MathHelper.floor_double(currentAxeDamage); i++) {
                 axe.getItem().onBlockDestroyed(axe, world, world.getBlockState(pos), pos, player);
+            }
+
         }
 
         if ((currentShearsDamage > 0.0F) && (shears != null))
@@ -590,6 +592,7 @@ public class Treecapitator
             BlockPos pos = list.remove(0);
             IBlockState state = world.getBlockState(pos);
             Block block = state.getBlock();
+
             if (!block.isAir(world.getBlockState(pos), world, pos))
             {
                 int metadata = block.getMetaFromState(state);
@@ -655,7 +658,7 @@ public class Treecapitator
                 world.setBlockToAir(pos);
 
                 // Can't believe it took this long to realize this wasn't being done...
-                player.addStat(StatList.MINE_BLOCK_STATS.get(Block.getIdFromBlock(block)), 1);
+                player.addStat(StatList.getBlockStats(block), 1);
                 player.addExhaustion(0.025F);
             }
         }
