@@ -2,23 +2,25 @@ package bspkrs.treecapitator.util;
 
 public class Reference
 {
-    public static final String MODID                              = "Treecapitator";
-    public static final String NAME                               = "Treecapitator";
-    public static final String PROXY_COMMON                       = "bspkrs.treecapitator.CommonProxy";
-    public static final String PROXY_CLIENT                       = "bspkrs.treecapitator.ClientProxy";
-    public static final String GUI_FACTORY                        = "bspkrs.treecapitator.fml.gui.ModGuiFactoryHandler";
+    public static final String MODID                                = "@MOD_ID@";
+    public static final String NAME                                 = "@MOD_NAME@";
+    public static final String VERSION                              = "@MOD_VERSION@";
+    public static final String PROXY_COMMON                         = "bspkrs.treecapitator.CommonProxy";
+    public static final String PROXY_CLIENT                         = "bspkrs.treecapitator.ClientProxy";
+    public static final String GUI_FACTORY                          = "bspkrs.treecapitator.fml.gui.ModGuiFactoryHandler";
+    public static final String FORGE_JSON_URL                       = "@JSON_URL@";
 
-    public static final String CONFIG_VERSION                     = "2.1";
+    public static final String CONFIG_VERSION                       = "2.1";
 
-    public static final String LANG_KEY_BASE                      = "bspkrs.tc.configgui.";
-    public static final String CTGY_LANG_KEY                      = "ctgy.";
+    public static final String LANG_KEY_BASE                        = "bspkrs.tc.configgui.";
+    public static final String CTGY_LANG_KEY                        = "ctgy.";
 
-    public static final String MINECRAFT                          = "minecraft";
+    public static final String MINECRAFT                            = "minecraft";
 
     // Packet constants
-    public static final byte   PROTOCOL_VERSION                   = 0x01;
-    public static final byte   PACKET_LOGIN                       = 0x00;
-    public static final byte   PACKET_CONFIG                      = 0x01;
+    public static final byte   PROTOCOL_VERSION                     = 0x01;
+    public static final byte   PACKET_LOGIN                         = 0x00;
+    public static final byte   PACKET_CONFIG                        = 0x01;
 
     // Config Categories
     public static final String OAK                                = "vanilla_oak";

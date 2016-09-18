@@ -1,7 +1,7 @@
 {
   "modListVersion": 2,
   "modList": [{
-    "modid": "Treecapitator",
+    "modid": "treecapitator",
     "name": "Treecapitator",
     "description": "Allows you to chop down entire trees by breaking a single log.",
     "version": "${mod_version}",
@@ -13,8 +13,8 @@
     "logoFile": "",
     "screenshots": [  ],
     "parent": "",
-    "requiredMods": [ "Forge@[${forge_version},)", "bspkrsCore@[${bscore_version},)" ],
-    "dependencies": [ "Forge@[${forge_version},)", "bspkrsCore@[${bscore_version},)" ],
+    "requiredMods": [ "Forge@[${forge_version},)", "bspkrscore@[${bscore_version},)" ],
+    "dependencies": [ "Forge@[${forge_version},)", "bspkrscore@[${bscore_version},)" ],
     "dependants": [  ],
     "useDependencyInformation": "true"
   }]

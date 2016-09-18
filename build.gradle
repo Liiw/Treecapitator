@@ -1,3 +1,6 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
 buildscript {
     repositories {
         mavenCentral()
@@ -13,28 +16,22 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
-        classpath 'com.matthewprenger:CurseGradle:1.0-SNAPSHOT'
     }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'com.matthewprenger.cursegradle'
 
 compileJava.options.encoding = 'UTF-8'
 
 repositories {
-    ivy {
-        url 'http://bspk.rs/MC'
-        layout 'pattern', {
-            artifact "[module]/%5B${project.minecraft_version}%5D[module]-universal-[revision].[ext]"
-            artifact "[module]/[${project.minecraft_version}][module]-universal-[revision].[ext]"
+    flatDir {
+          dirs = ["${projectDir}/lib","${projectDir}/../LocalRepos"]
         }
-    }
 }
 
-//dependencies {
-//    deobfCompile name: 'bspkrsCore', version: project.bscore_version, ext: 'jar'
-//}
+dependencies {
+    compile name: "[${project.minecraft_version}]bspkrscore", version: "${project.bscore_version}", classifier:"deobf", ext: 'jar'
+}
 
 group = project.group_name
 version = project.mod_version
@@ -44,8 +41,12 @@ minecraft {
     version = project.minecraft_version + '-' + project.forge_version // grab latest forge
     mappings = project.mappings_version
     runDir = 'run'
+    replace '@MOD_ID@', project.mod_id
+    replace '@MOD_NAME@', project.mod_name
     replace '@MOD_VERSION@', project.mod_version
-    replace '@BSCORE_VERSION@', project.bscore_version
+    replace '@JSON_URL@', project.forgeupdate_url
+
+    replaceIn 'Reference.java'
 }
 
 processResources {
@@ -70,35 +71,56 @@ processResources {
     }
 }
 
-// change the name of my obfuscated jar
 jar {
-    appendix = project.appendix
+    classifier = 'universal'
 }
 
 sourceJar {
-    appendix = 'src'
-    classifier = ''
+    classifier = 'src'
 }
 
 artifacts {
     archives sourceJar
 }
 
-if (project.hasProperty('api_key_curse') && project.hasProperty('extra_curse_id')) {
-    tasks.curseforge.dependsOn signJars
-    curseforge {
-        apiKey = project.api_key_curse
+task updateJson {
+    def fileName = new File('forgeupdate/forgeupdate.json')
+    def fujson = new JsonSlurper().parseText(fileName.text)
 
-        project {
-            id = project.extra_curse_id
-            changelog = ''
-            releaseType = project.hasProperty('extra_curse_releasetype') ? project.extra_curse_releasetype : 'release'
+    doLast {
+        //update update-URL
+        fujson['homepage'] = project.forgeupdate_url
 
-            addArtifact sourceJar
+        //update promoted versions
+        def lateststr = project.minecraft_version + '-latest'
+        fujson['promos'][lateststr] = project.mod_version.toString()
+        def recomstr = project.minecraft_version + '-recommended'
+        fujson['promos'][recomstr] = project.mod_version.toString()
 
-            relations {
-                requiredLibrary 'bspkrscore'
-            }
+//    //update version notes
+//    relnote = "Get this from git or something"
+//    fujson[project.minecraft_version][project.mod_version] = relnote
+
+        def jsOut = JsonOutput.toJson(fujson)
+        fileName.write(JsonOutput.prettyPrint(jsOut))
+    }
+}
+
+build.finalizedBy updateJson
+
+uploadArchives {
+    repositories {
+        flatDir {
+            dirs "${projectDir}/../LocalRepos"
         }
+    }
+
+    dependsOn 'build'
+    mustRunAfter 'build'
+}
+
+idea {
+    module {
+        inheritOutputDirs = true
     }
 }

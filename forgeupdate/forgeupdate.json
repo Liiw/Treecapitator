@@ -1,0 +1,7 @@
+{
+    "homepage": "https://raw.githubusercontent.com/jco2641/Treecapitator/master/forgeupdate/forgeupdate.json",
+    "promos": {
+        "1.10.2-latest": "2.0",
+        "1.10.2-recommended": "2.0"
+    }
+}

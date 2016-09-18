@@ -11,7 +11,6 @@ import bspkrs.treecapitator.registry.ThirdPartyModConfig;
 import bspkrs.treecapitator.util.Reference;
 import bspkrs.treecapitator.util.TCLog;
 import bspkrs.util.CommonUtils;
-import bspkrs.util.Const;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -25,8 +24,7 @@ import net.minecraftforge.fml.common.event.FMLInterModComms.IMCMessage;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = "@MOD_VERSION@", dependencies = "required-after:bspkrsCore@[@BSCORE_VERSION@,)",
-        useMetadata = true, guiFactory = Reference.GUI_FACTORY, updateJSON = Const.VERSION_URL_BASE + Reference.MODID + Const.VERSION_URL_EXT)
+@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, useMetadata = true, guiFactory = Reference.GUI_FACTORY, updateJSON = Reference.FORGE_JSON_URL )
 public class TreecapitatorMod
 {
     private RegistryNBTManager      nbtManager;
