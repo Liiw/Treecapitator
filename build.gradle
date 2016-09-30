@@ -28,8 +28,8 @@ repositories {
           dirs = ["${projectDir}/lib","${projectDir}/../LocalRepos"]
         }
     ivy {
-        url "http://twisted.nfshost.com/"
-        layout "pattern", {
+          url "http://twisted.nfshost.com/"
+          layout "pattern", {
             artifact "bspkrscore/deobf/[module]-[revision]-deobf.[ext]"
         }
     }
