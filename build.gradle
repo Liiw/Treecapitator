@@ -30,7 +30,7 @@ repositories {
     ivy {
         url "http://twisted.nfshost.com/"
         layout "pattern", {
-            artifact "[module]/deobf/%5B${project.minecraft_version}%5D[module]-[revision]-[classifier].[ext]"
+            artifact "bspkrscore/deobf/[module]-[revision]-deobf.[ext]"
         }
     }
 }
