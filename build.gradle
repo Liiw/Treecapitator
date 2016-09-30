@@ -24,9 +24,15 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 compileJava.options.encoding = 'UTF-8'
 
 repositories {
-    flatDir {
-          dirs = ["${projectDir}/lib","${projectDir}/../LocalRepos"]
+//    flatDir {
+//          dirs = ["${projectDir}/lib","${projectDir}/../LocalRepos"]
+//        }
+    ivy {
+        url "http://twisted.nfshost.com/"
+        layout "pattern", {
+            artifact "[module]/deobf/[${project.minecraft_version}][module][revision][classifier].[ext]"
         }
+    }
 }
 
 dependencies {
